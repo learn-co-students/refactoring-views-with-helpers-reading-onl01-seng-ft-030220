@@ -72,7 +72,7 @@ the `index` template. Simple enough, right?
 
 <% @posts.each do |post| %>
   <div>
-    <%= post.title %> - <%= post.updated_at.strftime("Last updated %A, %b %e, at %l:%M %p") %>
+    <%= post.title %> <p><%= @post.updated_at.strftime("Last updated %A, %b %e, at %l:%M %p") %></p>
   </div>
 <% end %>
 ```
@@ -85,7 +85,7 @@ reference. Okay, we can do that. Let's add it to the `edit` template.
 <!-- app/views/posts/edit.html.erb -->
 
 <%= form_for(@post) do |f| %>
-  <label><%= @post.updated_at.strftime("Last updated %A, %b %e, at %l:%M %p") %></label><br>
+  <%= post.title %> <p><%= @post.updated_at.strftime("Last updated %A, %b %e, at %l:%M %p") %></p>
   <label>Post title:</label><br>
   <%= f.text_field :title %><br>
 
@@ -232,7 +232,7 @@ Our blog also has an author page that lists the posts by that author. What do we
 do if we want to also show the last updated time on that page? The answer is:
 the same thing we just did!
 
-```erb
+```erb 
 <!-- app/views/authors/show.html.erb -->
 
 <h1><%= @author.name %></h1>
@@ -255,8 +255,15 @@ codebase organized.
 What about things that aren't the concern of a single controller and are
 applicable to the entire application? For these cases, we have the
 `application_helper`. This helper is created automatically with your Rails
-project and is where you keep helpers that are related to the application itself
+project and is where you keep helpers that are related to the application itself»
 rather than any given model or controller.
+
+
+
+
+
+
+
 
 In applications where users can log in, the application helper will often have a
 method to expose a `current_user`, something which gets used on almost every
